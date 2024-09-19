@@ -3,7 +3,6 @@
 ### 介绍
 
 基于.Net8+JWT+EF8+MediatR+Serilog+Hangfire+Redis等技术栈构建的整洁架构多模块Api解决方案
-[跳转到前端代码仓库](https://gitee.com/yorkove/voyagerui)
 
 ### 当前功能
 1. 接口管理：自动同步Swagger的接口数据
@@ -79,10 +78,6 @@ dotnet ef migrations add Hello --project ../YG.Migrators.MySQL/ -c ConsoleDbCont
 
 > 在线用户
 
-### 参考自
-
-- [Admin.Core](https://github.com/zhontai/Admin.Core): https://github.com/zhontai/Admin.Core
-- [Admin.NET](https://gitee.com/zuohuaijun/Admin.NET): https://gitee.com/zuohuaijun/Admin.NET
 
 ### 参与贡献
 
