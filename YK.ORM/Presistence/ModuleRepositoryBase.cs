@@ -112,7 +112,7 @@ public class ModuleRepositoryBase<T> : RepositoryBase<T>, IModuleRepositoryBase<
     public Task<int> SoftDeleteAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
     {
         var spec = new EntitiesExpressionSpec<T>(expression);
-        var query = _evaluator.GetQuery(_dbContext.Set<T>().AsQueryable(), spec, true);
+        var query = ApplySpecification(spec);
         _dbContext.Set<T>().RemoveRange(query);
         return _dbContext.SaveChangesAsync();
     }
