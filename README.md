@@ -78,10 +78,6 @@ dotnet ef migrations add Hello --project ../YG.Migrators.MySQL/ -c ConsoleDbCont
 
 > 在线用户
 
-### 参考自
-
-- [Admin.Core](https://github.com/zhontai/Admin.Core): https://github.com/zhontai/Admin.Core
-- [Admin.NET](https://gitee.com/zuohuaijun/Admin.NET): https://gitee.com/zuohuaijun/Admin.NET
 
 ### 参与贡献
 
