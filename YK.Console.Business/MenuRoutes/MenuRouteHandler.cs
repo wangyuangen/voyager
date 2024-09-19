@@ -32,7 +32,7 @@ internal class UpdateMenuRouteHandler(IRepository<MenuRouteInfo> _repo) : IReque
 internal class DeleteMenuRouteHandler(IRepository<MenuRouteInfo> _repo) : IRequestHandler<DeleteMenuRouteRequest, int>
 {
     public Task<int> Handle(DeleteMenuRouteRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 

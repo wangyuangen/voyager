@@ -25,7 +25,7 @@ internal class UpdatePostInfoHandler(IRepository<PostInfo> _repo) : IRequestHand
 internal class DeletePostInfoHandler(IRepository<PostInfo> _repo) : IRequestHandler<DeletePostInfoRequest, int>
 {
     public Task<int> Handle(DeletePostInfoRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 

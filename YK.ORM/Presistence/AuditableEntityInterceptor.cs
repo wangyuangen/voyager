@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace YK.ORM.Persistence;
 
@@ -30,77 +29,68 @@ public class AuditableEntityInterceptor(ICurrentUser currentUser) : SaveChangesI
 
         foreach (var entry in context.ChangeTracker.Entries<IEntity>())
         {
-            if (entry.State is EntityState.Added or EntityState.Modified || HasChangedOwnedEntities(entry))
+            switch (entry.State)
             {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
+                case EntityState.Added:
 
-                        //新增
-                        if(entry.Entity is IAuditableEntity addedEntity)
-                        {
-                            addedEntity.CreatedBy = addedEntity.CreatedBy.IsNullOrEmpty() 
-                                ? currentUser.UserId 
-                                : addedEntity.CreatedBy;
+                    //新增
+                    if (entry.Entity is IAuditableEntity addedEntity)
+                    {
+                        addedEntity.CreatedBy = addedEntity.CreatedBy.IsNullOrEmpty()
+                            ? currentUser.UserId
+                            : addedEntity.CreatedBy;
 
-                            addedEntity.CreatedOrgBy = addedEntity.CreatedOrgBy.IsNullOrEmpty() 
-                                ? currentUser.OrgId 
-                                : addedEntity.CreatedOrgBy;
+                        addedEntity.CreatedOrgBy = addedEntity.CreatedOrgBy.IsNullOrEmpty()
+                            ? currentUser.OrgId
+                            : addedEntity.CreatedOrgBy;
 
-                            addedEntity.CreatedUserStaffBy = addedEntity.CreatedUserStaffBy.IsNullOrEmpty()
-                                ? currentUser.UserStaffId
-                                : addedEntity.CreatedUserStaffBy;
+                        addedEntity.CreatedUserStaffBy = addedEntity.CreatedUserStaffBy.IsNullOrEmpty()
+                            ? currentUser.UserStaffId
+                            : addedEntity.CreatedUserStaffBy;
 
-                            addedEntity.CreatedUserName = addedEntity.CreatedUserName.IsNullOrEmpty()
-                                ? currentUser.RealName ?? currentUser.NickName
-                                : addedEntity.CreatedUserName;
-                        }
+                        addedEntity.CreatedUserName = addedEntity.CreatedUserName.IsNullOrEmpty()
+                            ? currentUser.RealName ?? currentUser.NickName
+                            : addedEntity.CreatedUserName;
+                    }
 
-                        //租户
-                        if (entry.Entity is ITenant tenant)
-                        {
-                            tenant.TenantId = tenant.TenantId.IsNullOrEmpty()
-                                ? currentUser.TenantId ?? Guid.Empty
-                                : tenant.TenantId;
-                        }
-                        
-                        break;
+                    //租户
+                    if (entry.Entity is ITenant tenant)
+                    {
+                        tenant.TenantId = tenant.TenantId.IsNullOrEmpty()
+                            ? currentUser.TenantId ?? Guid.Empty
+                            : tenant.TenantId;
+                    }
 
-                    case EntityState.Modified:
+                    break;
 
-                        if (entry.Entity is IAuditableEntity modifiedEntity)
-                        {
-                            //编辑信息
-                            modifiedEntity.LastModifiedOn = DateTime.Now;
-                            modifiedEntity.LastModifiedBy = currentUser.UserId;
+                case EntityState.Modified:
 
-                            modifiedEntity.ModifiedUserName = modifiedEntity.ModifiedUserName.IsNullOrEmpty()
-                                ? currentUser.RealName ?? currentUser.NickName
-                                : modifiedEntity.ModifiedUserName;
-                        }
+                    if (entry.Entity is IAuditableEntity modifiedEntity)
+                    {
+                        //编辑信息
+                        modifiedEntity.LastModifiedOn = DateTime.Now;
+                        modifiedEntity.LastModifiedBy = currentUser.UserId;
 
-                        break;
+                        modifiedEntity.ModifiedUserName = modifiedEntity.ModifiedUserName.IsNullOrEmpty()
+                            ? currentUser.RealName ?? currentUser.NickName
+                            : modifiedEntity.ModifiedUserName;
+                    }
 
-                    case EntityState.Deleted:
-                       
-                        if (entry.Entity is ISoftDelete softDelete)
-                        {
-                            //软删除
-                            softDelete.DeletedBy = currentUser.UserId;
-                            softDelete.DeletedOn = DateTime.Now;
-                            entry.State = EntityState.Modified;
-                        }
+                    break;
 
-                        break;
-                }
+                case EntityState.Deleted:
+
+                    if (entry.Entity is ISoftDelete softDelete)
+                    {
+                        //软删除
+                        softDelete.DeletedBy = currentUser.UserId;
+                        softDelete.DeletedOn = DateTime.Now;
+                        entry.State = EntityState.Modified;
+                    }
+
+                    break;
             }
         }
         context.ChangeTracker.DetectChanges();
     }
-
-    public bool HasChangedOwnedEntities(EntityEntry entry) =>
-       entry.References.Any(r =>
-           r.TargetEntry != null &&
-           r.TargetEntry.Metadata.IsOwned() &&
-           (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
 }

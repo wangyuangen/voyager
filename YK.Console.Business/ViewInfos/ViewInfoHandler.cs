@@ -27,7 +27,7 @@ internal class UpdateViewInfoHandler(IRepository<ViewInfo> _repo) : IRequestHand
 internal class DeleteViewInfoHandler(IRepository<ViewInfo> _repo) : IRequestHandler<DeleteViewInfoRequest, int>
 {
     public Task<int> Handle(DeleteViewInfoRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 

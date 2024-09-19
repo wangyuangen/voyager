@@ -60,7 +60,7 @@ internal class UpdateUserStaffHandler(IUserStaffOperation _operation) : IRequest
 internal class DeleteUserStaffHandler(IRepository<UserStaffInfo> _repo,ISender _sender) : IRequestHandler<DeleteUserStaffRequest, int>
 {
     public Task<int> Handle(DeleteUserStaffRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 internal class UserStaffPageHandler(IReadRepository<UserStaffInfo> _repo) : IRequestHandler<UserStaffPageRequest, PaginationResponse<UserStaffPageOutput>>

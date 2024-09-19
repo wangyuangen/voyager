@@ -28,7 +28,7 @@ internal class SaveRoleMenuRouteHandler(IRepository<RoleMenuRoute> _repo) : IReq
 
         if (deleteMenus.Any())
         {
-            await _repo.DeleteAsync(x => x.RoleId == request.RoleId && deleteMenus.Contains(x.MenuRouteId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.RoleId == request.RoleId && deleteMenus.Contains(x.MenuRouteId), cancellationToken);
         }
 
         return true;

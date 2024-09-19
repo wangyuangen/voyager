@@ -29,7 +29,7 @@ internal class SavePackageMenuRouteHandler(IRepository<PackageMenuRoute> _repo) 
 
         if (deletes.Any())
         {
-            await _repo.DeleteAsync(x => x.PackageId == request.PackageId && deletes.Contains(x.MenuRouteId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.PackageId == request.PackageId && deletes.Contains(x.MenuRouteId), cancellationToken);
         }
 
         return true;

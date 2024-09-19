@@ -43,7 +43,7 @@ internal class UpdatePermissionGroupHandler(IRepository<PermissionGroup> _repo, 
 internal class DeletePermissionGroupHandler(IRepository<PermissionGroup> _repo) : IRequestHandler<DeletePermissionGroupRequest, int>
 {
     public Task<int> Handle(DeletePermissionGroupRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 

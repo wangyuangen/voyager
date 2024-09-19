@@ -30,7 +30,7 @@ internal class SavePermissionGroupApiHandler(IRepository<PermissionGroupApi> _re
 
         if (deletes.Any())
         {
-            await _repo.DeleteAsync(x => x.PermissionGroupId == request.PermissionGroupId && deletes.Contains(x.ApiId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.PermissionGroupId == request.PermissionGroupId && deletes.Contains(x.ApiId), cancellationToken);
         }    
        
         return true;

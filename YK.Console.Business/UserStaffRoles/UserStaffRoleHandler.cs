@@ -32,7 +32,7 @@ internal class SaveUserStaffRoleHandler(IRepository<UserStaffRole> _repo,ICacheM
 
         if (deletes.Any())
         {
-            await _repo.DeleteAsync(x => x.UserStaffId == request.UserStaffId && deletes.Contains(x.RoleId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.UserStaffId == request.UserStaffId && deletes.Contains(x.RoleId), cancellationToken);
         }
 
         var key = CacheConsts.GetKey<ApiPermissionDataScope>(_currentUser.TenantId, request.UserStaffId);

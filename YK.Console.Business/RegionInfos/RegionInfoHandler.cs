@@ -34,7 +34,7 @@ internal class UpdateRegionInfoHandler(IRepository<RegionInfo> _repo) : IRequest
 internal class DeleteRegionInfoHandler(IRepository<RegionInfo> _repo) : IRequestHandler<DeleteRegionInfoRequest, int>
 {
     public Task<int> Handle(DeleteRegionInfoRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 internal class RegionInfoPageHandler(IReadRepository<RegionInfo> _repo) : IRequestHandler<RegionInfoPageRequest, PaginationResponse<RegionInfoPageOutput>>

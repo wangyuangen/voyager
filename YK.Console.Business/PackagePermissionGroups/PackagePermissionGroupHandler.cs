@@ -29,7 +29,7 @@ internal class SavePackagePermissionGroupHandler(IRepository<PackagePermissionGr
 
         if (deletes.Any())
         {
-            await _repo.DeleteAsync(x => x.PackageId == request.PackageId && deletes.Contains(x.PermissionGroupId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.PackageId == request.PackageId && deletes.Contains(x.PermissionGroupId), cancellationToken);
         }
 
         return true;

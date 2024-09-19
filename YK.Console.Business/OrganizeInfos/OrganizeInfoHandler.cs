@@ -28,7 +28,7 @@ internal class UpdateOrganizeInfoHandler(IRepository<OrganizeInfo> _repo) : IReq
 internal class DeleteOrganizeInfoHandler(IRepository<OrganizeInfo> _repo) : IRequestHandler<DeleteOrganizeInfoRequest, int>
 {
     public Task<int> Handle(DeleteOrganizeInfoRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 

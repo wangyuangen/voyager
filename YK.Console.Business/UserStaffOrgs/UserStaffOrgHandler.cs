@@ -33,7 +33,7 @@ internal class SaveUserStaffOrgHandler(IRepository<UserStaffOrg> _repo,ICacheMan
 
         if (deletes.Any())
         {
-            await _repo.DeleteAsync(x => x.UserStaffId == request.UserStaffId && deletes.Contains(x.OrgId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.UserStaffId == request.UserStaffId && deletes.Contains(x.OrgId), cancellationToken);
         }
 
         var key = CacheConsts.GetKey<UserStaffPermissionScope>(_currentUser.TenantId, request.UserStaffId);

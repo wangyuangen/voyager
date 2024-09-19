@@ -57,7 +57,7 @@ internal class DeleteRoleInfoHandler(IRepository<RoleInfo> _repo,IEventPublisher
     public Task<int> Handle(DeleteRoleInfoRequest request, CancellationToken cancellationToken)
     {
         _domainEvent.PublishAsync(new RoleAuthChangeEvent(request.Id));
-        return _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        return _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
     }
 }
 

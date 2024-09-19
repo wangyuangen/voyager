@@ -28,7 +28,7 @@ internal class SaveRolePermissionGroupHandler(IRepository<RolePermissionGroup> _
 
         if (deletePermissionGroups.Any())
         {
-            await _repo.DeleteAsync(x => x.RoleId == request.RoleId && deletePermissionGroups.Contains(x.PermissionGroupId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.RoleId == request.RoleId && deletePermissionGroups.Contains(x.PermissionGroupId), cancellationToken);
         }
 
         return true;

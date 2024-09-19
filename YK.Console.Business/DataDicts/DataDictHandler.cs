@@ -26,7 +26,7 @@ internal class UpdateDataDictHandler(IRepository<DataDictInfo> _repo) : IRequest
 internal class DeleteDataDictHandler (IRepository<DataDictInfo> _repo): IRequestHandler<DeleteDataDictRequest, int>
 {
     public Task<int> Handle(DeleteDataDictRequest request, CancellationToken cancellationToken)
-        => _repo.DeleteAsync(x => x.Id == request.Id, cancellationToken);
+        => _repo.SoftDeleteAsync(x => x.Id == request.Id, cancellationToken);
 }
 
 internal class DataDictSearchHandler(IReadRepository<DataDictInfo> _repo)  : IRequestHandler<DataDictSearchRequest, List<DataDictOutput>>

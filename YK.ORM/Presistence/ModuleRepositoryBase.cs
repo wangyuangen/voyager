@@ -1,4 +1,5 @@
-﻿using Ardalis.Specification.EntityFrameworkCore;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using YK.ORM.Abstractions;
@@ -106,7 +107,15 @@ public class ModuleRepositoryBase<T> : RepositoryBase<T>, IModuleRepositoryBase<
     }
 
     public Task<int> DeleteAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
-        => _dbContext.Set<T>().Where(expression).ExecuteDeleteAsync(cancellationToken);
+        =>_dbContext.Set<T>().Where(expression).ExecuteDeleteAsync(cancellationToken);
+
+    public Task<int> SoftDeleteAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
+    {
+        var spec = new EntitiesExpressionSpec<T>(expression);
+        var query = _evaluator.GetQuery(_dbContext.Set<T>().AsQueryable(), spec, true);
+        _dbContext.Set<T>().RemoveRange(query);
+        return _dbContext.SaveChangesAsync();
+    }
 
     #endregion
 }

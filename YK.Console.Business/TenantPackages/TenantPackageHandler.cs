@@ -29,7 +29,7 @@ internal class SaveTenantPackageHandler(IRepository<TenantPackage> _repo) : IReq
 
         if (deletes.Any())
         {
-            await _repo.DeleteAsync(x => x.TenantId == request.TenantId && deletes.Contains(x.PackageId), cancellationToken);
+            await _repo.SoftDeleteAsync(x => x.TenantId == request.TenantId && deletes.Contains(x.PackageId), cancellationToken);
         }
 
         return true;
