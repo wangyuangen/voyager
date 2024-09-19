@@ -1,25 +1,13 @@
-﻿using YK.Console.Business.OrganizeInfos;
-using YK.Console.Business.PostInfos;
-using YK.Console.Business.UserInfos;
+﻿using YK.Core.Enums;
+using YK.Module.Core.Contracts;
+using YK.Module.Core.Enums;
 
-namespace YK.Console.Business.UserStaffInfos;
-
-/// <summary>
-/// 员工分页输出
-/// </summary>
-public class UserStaffPageOutput:UserStaffOutput
-{
-    /// <summary>
-    /// 用户信息
-    /// </summary>
-    public virtual UserInfoOutput User { get; set; }
-}
-
+namespace YK.Module.Core.Models;
 
 /// <summary>
 /// 员工
 /// </summary>
-public class UserStaffOutput: AuditableOutput
+public class UserStaffOutput : AuditableOutput
 {
     /// <summary>
     /// 所属用户Id

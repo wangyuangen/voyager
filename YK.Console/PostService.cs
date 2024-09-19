@@ -1,5 +1,6 @@
 ﻿using YK.Console.Business.PostInfos;
 using YK.Console.Core.Consts;
+using YK.Module.Core.Models;
 
 namespace YK.Console;
 

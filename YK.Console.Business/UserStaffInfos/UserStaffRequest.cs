@@ -20,6 +20,23 @@ public class GetUserStaffExtendRequest:IRequest<UserStaffExtendOutput>
 }
 
 /// <summary>
+/// 员工Id
+/// </summary>
+public class UserStaffInfoRequest : IRequest<UserStaffOutput>
+{
+    /// <summary>
+    /// 主键Id
+    /// </summary>
+    [Required]
+    public Guid Id { get; set; }
+
+    public UserStaffInfoRequest(Guid id)
+    {
+        Id = id;
+    }
+}
+
+/// <summary>
 /// 创建员工
 /// </summary>
 public class CreateUserStaffRequest:UserStaffInput,IRequest<Guid>

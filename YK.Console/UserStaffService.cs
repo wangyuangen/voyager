@@ -3,6 +3,7 @@ using YK.Console.Core.Consts;
 using YK.Console.Core.Entities;
 using YK.Core.Attributes;
 using YK.Core.Authorize;
+using YK.Module.Core.Models;
 using YK.ORM.Abstractions;
 
 namespace YK.Console;

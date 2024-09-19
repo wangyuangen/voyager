@@ -21,3 +21,4 @@ global using FluentValidation;
 global using YK.Core.Enums;
 global using YK.Core.Authorize;
 global using Microsoft.Extensions.Logging;
+global using YK.Module.Core.Models;

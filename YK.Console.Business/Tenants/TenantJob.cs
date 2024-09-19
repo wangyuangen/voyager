@@ -19,7 +19,7 @@ public class TenantJob(ConsoleDbContext _dbContext) : ITenantJob
         {
             Enabled = EnabledStatusEnum.Enabled,
             Name = tenantInfo.CompanyName,
-            OrganizeType = Core.Enums.OrganizeTypeEnum.Company,
+            OrganizeType = OrganizeTypeEnum.Company,
             ParentId = Guid.Empty,
             Remark = "租户初始化创建的默认机构",
             Sort = 1,

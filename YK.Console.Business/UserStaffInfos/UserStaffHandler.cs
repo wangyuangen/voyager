@@ -4,6 +4,13 @@ using YK.Console.Business.Abstractors;
 
 namespace YK.Console.Business.UserStaffInfos;
 
+internal class UserStaffInfoHandler(IReadRepository<UserStaffInfo> _repo) : IRequestHandler<UserStaffInfoRequest, UserStaffOutput>
+{
+    public async Task<UserStaffOutput> Handle(UserStaffInfoRequest request, CancellationToken cancellationToken)
+         => await _repo.SimpleSingleAsync<UserStaffOutput>(x => x.Id == request.Id, cancellationToken)
+                ?? throw ResultOutput.Exception("员工不存在");
+}
+
 internal class GetUserStaffExtendHandler(IReadRepository<UserStaffOrg> _staffOrgRepo, IReadRepository<UserStaffRole> _staffRoleRepo)
     : IRequestHandler<GetUserStaffExtendRequest, UserStaffExtendOutput>
 {

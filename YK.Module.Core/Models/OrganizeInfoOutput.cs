@@ -1,7 +1,11 @@
-﻿using YK.Console.Core.Enums;
+﻿using YK.Module.Core.Contracts;
+using YK.Module.Core.Enums;
 
-namespace YK.Console.Business.OrganizeInfos;
+namespace YK.Module.Core.Models;
 
+/// <summary>
+/// 机构输出
+/// </summary>
 public class OrganizeInfoOutput: AuditableOutput
 {
     /// <summary>

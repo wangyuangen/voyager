@@ -6,6 +6,7 @@ namespace YK.Module.Core.Enums;
 /// <summary>
 /// 性别
 /// </summary>
+[Description("性别")]
 public enum GenderEnum
 {
     /// <summary>

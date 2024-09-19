@@ -56,7 +56,7 @@ public class ViewInfo:AuditableSoftDeleteEntity
     public ViewInfo Update(string? routeName=null, string? name=null, string? path = null, string? remark = null, bool? isKeepAlive=null, 
         int? sort=null, EnabledStatusEnum? enabled=null, Guid? parentId = null)
     {
-        if(routeName is not null && RouteName?.Equals(RouteName) is not true)
+        if(routeName is not null && RouteName?.Equals(routeName) is not true)
             RouteName = routeName;
         if(name is not null && Name?.Equals(name) is not true)
             Name = name;    

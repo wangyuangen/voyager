@@ -3,6 +3,7 @@
 /// <summary>
 /// 地区级别
 /// </summary>
+[Description("地区级别")]
 public enum RegionLevel
 {
     /// <summary>

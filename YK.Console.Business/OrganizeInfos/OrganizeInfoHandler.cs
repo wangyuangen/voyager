@@ -36,9 +36,12 @@ internal class OrganizeInfoSearchHandler(IReadRepository<OrganizeInfo> _repo) : 
 {
     public Task<List<OrganizeInfoOutput>> Handle(OrganizeInfoSearchRequest request, CancellationToken cancellationToken)
     {
-        Expression<Func<OrganizeInfo, bool>>? expression = request.Enabled.HasValue
-           ? x => x.Enabled == request.Enabled
-           : null;
+        Expression<Func<OrganizeInfo, bool>>? expression = x => true;
+        if (request.OrganizeType.HasValue)
+            expression = expression.AndAlso(x => x.OrganizeType == request.OrganizeType.Value);
+        if (request.Enabled.HasValue)
+            expression = expression.AndAlso(x => x.Enabled == request.Enabled.Value);
+
         return _repo.SimpleListAsync<OrganizeInfoOutput>(request, expression, cancellationToken);
     }
 }

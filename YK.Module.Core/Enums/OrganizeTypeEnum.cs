@@ -1,4 +1,6 @@
-﻿namespace YK.Console.Core.Enums;
+﻿using System.ComponentModel;
+
+namespace YK.Module.Core.Enums;
 
 /// <summary>
 /// 机构类型

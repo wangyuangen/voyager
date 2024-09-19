@@ -1,5 +1,4 @@
 ﻿using YK.Console.Business.Abstractors;
-using YK.Console.Business.OrganizeInfos;
 using YK.Console.Business.UserInfos;
 using YK.Console.Business.UserStaffOrgs;
 using YK.Console.Business.UserStaffRoles;
