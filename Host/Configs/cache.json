@@ -1,0 +1,14 @@
+{
+  "CacheOptions": {
+    //使用分布式缓存
+    "UseDistributedCache": true,
+    //使用redis背板
+    "PreferRedis": false,
+    //redis地址,PreferRedis:true时生效
+    "RedisURL": "127.0.0.1:6379",
+    //redis密码:PreferRedis:true时生效
+    "RedisAuth": "pwd123",
+    //默认过期时长(小时)
+    "DefaultExpirationForHour": 8
+  }
+}

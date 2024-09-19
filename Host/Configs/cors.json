@@ -1,0 +1,10 @@
+{
+  "CorsOptions": {
+    "WebWhiteList": [
+      "http://localhost:8100"
+    ],
+    "AppWhiteList": [
+
+    ]
+  }
+}

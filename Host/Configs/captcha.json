@@ -1,0 +1,47 @@
+{
+  //滑块验证码
+  "SlideCaptcha": {
+    // 缓存过期时长
+    "ExpirySeconds": 300,
+    // 缓存前缀
+    "StoreageKeyPrefix": "console:captcha:slide",
+    // 容错值(校验时用，缺口位置与实际滑动位置匹配容错范围)
+    "Tolerant": 0.02,
+    // 背景图配置
+    "Backgrounds": [
+      {
+        "Type": "file",
+        "Data": "wwwroot/captcha/jigsaw/backgrounds/1.jpg"
+      },
+      {
+        "Type": "file",
+        "Data": "wwwroot/captcha/jigsaw/backgrounds/2.jpg"
+      },
+      {
+        "Type": "file",
+        "Data": "wwwroot/captcha/jigsaw/backgrounds/3.jpg"
+      },
+      {
+        "Type": "file",
+        "Data": "wwwroot/captcha/jigsaw/backgrounds/4.jpg"
+      },
+      {
+        "Type": "file",
+        "Data": "wwwroot/captcha/jigsaw/backgrounds/5.jpg"
+      }
+    ],
+    // Templates不配置，则使用默认模板
+    "Templates": [
+      //{
+      //  "Slider": {
+      //    "Type": "file",
+      //    "Data": "wwwroot/captcha/jigsaw/templates/1/transparent.png"
+      //  },
+      //  "Hole": {
+      //    "Type": "file",
+      //    "Data": "wwwroot/captcha/jigsaw/templates/1/dark.png"
+      //  }
+      //}
+    ]
+  }
+}

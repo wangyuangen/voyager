@@ -1,0 +1,10 @@
+{
+  "SignalROptions": {
+    "UseBackplane": false,
+    "Backplane": {
+      "Provider": "redis",
+      "StringConnection": "127.0.0.1:6379",
+      "Auth": "pwd123"
+    }
+  }
+}

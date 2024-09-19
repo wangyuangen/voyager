@@ -1,0 +1,12 @@
+﻿global using YK.Core.Contract;
+global using FluentValidation;
+global using YK.DynamicApi;
+global using YK.DynamicApi.Attributes;
+global using MediatR;
+global using System.ComponentModel.DataAnnotations;
+global using YK.ORM.Persistence;
+global using YK.Core;
+global using YK.Core.DependencyInjection;
+global using YK.Infrastructure.Interceptors;
+global using YK.Authorize.Models;
+global using YK.Core.Commons;

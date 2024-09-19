@@ -1,0 +1,52 @@
+{
+  "OpenApiOptions": {
+    //开启api性能分析
+    "MiniProfiler": false,
+    //Swagger文档
+    "Swagger": {
+      //启用
+      "Enable": true,
+      //启用枚举架构过滤器
+      "EnableEnumSchemaFilter": true,
+      //启用接口排序文档过滤器
+      "EnableOrderTagsDocumentFilter": true,
+      //启用枚举属性名
+      "EnableJsonStringEnumConverter": false,
+      //启用SchemaId命名空间
+      "EnableSchemaIdNamespace": false,
+      //程序集列表，用于启用SchemaId命名空间
+      "AssemblyNameList": [],
+      //路由前缀，如配置微服务文档地址：doc/module/swagger
+      "RoutePrefix": "admin/swagger",
+      //地址
+      "Url": "http://localhost:8000",
+      //页脚
+      "Footer": {
+        "Enable": false,
+        "Content": "Copyright<a-icon type=\"copyright\" /> 2022-<a target=\"_blank\">Yorkove-Platform</a>"
+      },
+      "Projects": [
+        //api项目分组
+        {
+          "Name": "Console",
+          "Code": "console",
+          "Version": "v1.1.0",
+          "Description": "控制中心"
+        },
+        {
+          "Name": "CRM",
+          "Code": "crm",
+          "Version": "v1.1.0",
+          "Description": "客户关系管理"
+        }
+      ]
+    },
+    //Homedz接口文档
+    "ApiUI": {
+      //启用
+      "Enable": true,
+      //路由前缀，如配置微服务文档地址：doc/module
+      "RoutePrefix": "admin"
+    }
+  }
+}

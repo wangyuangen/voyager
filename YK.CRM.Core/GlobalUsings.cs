@@ -1,0 +1,15 @@
+﻿global using YK.Infrastructure.Interceptors;
+global using YK.ORM.Persistence;
+global using Microsoft.Extensions.DependencyInjection;
+global using YK.Core.DependencyInjection;
+global using YK.ORM.Options;
+global using YK.ORM.Presistence;
+global using Castle.DynamicProxy;
+global using YK.Core.Contract;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging;
+global using YK.ORM.Abstractions;
+global using Ardalis.Specification;
+global using Mapster;
+global using YK.Core.Authorize;
+global using YK.Core.Events;

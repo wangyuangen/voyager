@@ -1,0 +1,14 @@
+{
+  "AuthorizeOptions": {
+    //发行者
+    "Issuer": "yorkove",
+    //订阅者
+    "Audience": "yorkove",
+    //密钥
+    "SecurityKey": "f013dd97e0e711ee8e1f8cec4b9877db022c2d2ce0e811ee8e1f8cec4b9877db",
+    //有效期(分钟) 120 = 2小时
+    "Expires": 120,
+    //刷新有效期(分钟) 1440 = 1天
+    "RefreshExpires": 1440
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "FIleUploadOptions": {
+    //使用OSS存储
+    "EnabledOssStorage": false,
+    //OSS文件存储供应商
+    "OSSProvider": "Aliyun",
+    //oss配置
+    "OSSOptions": [
+      {
+        "Provider": "Aliyun",
+        "Endpoint": "oss-cn-shenzhen.aliyuncs.com",
+        //地区
+        "Region": "",
+        "AccessKey": "",
+        "SecretKey": "",
+        "IsEnableHttps": true,
+        //启用缓存
+        "IsEnableCache": true,
+        //存储桶
+        "BucketName": "admin",
+        //文件外链
+        "Url": ""
+      }
+    ],
+    //上传根目录
+    "RootDirectory": "UploadFiles",
+    //日期目录格式化
+    "DateFormatterDirectory": "yyyy/MM/dd",
+    //上传文件的最大限制
+    "MaxSize": 104857600,
+    //允许上传的文件后缀名,默认为空允许所有
+    "AllowedExtension": [],
+    //不允许上传的文件后缀名
+    "NotAllowedExtension": []
+  }
+}

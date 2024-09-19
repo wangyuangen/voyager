@@ -1,0 +1,14 @@
+﻿{
+  //控制中心数据库
+  "ConsoleDbOptions": {
+    //数据库类型
+    "Provider": "mysql",
+    //连接字符串
+    "ConnectionString": "server=localhost;uid=root;pwd=123456;database=yorkove;Allow User Variables=True"
+  },
+  //crm数据库
+  "CrmDbOptions": {
+    "Provider": "mysql",
+    "ConnectionString": "server=localhost;uid=root;pwd=123456;database=yorkove_crm;Allow User Variables=True"
+  }
+}

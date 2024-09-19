@@ -1,0 +1,12 @@
+﻿global using FluentValidation;
+global using MediatR;
+global using Serilog;
+global using YK.Core.Contract;
+global using YK.Core.Events;
+global using YK.Core.Commons;
+global using YK.Core.Options;
+global using YK.Core;
+global using YK.Core.DependencyInjection;
+global using YK.Core.Extensions;
+global using YK.Core.Authorize;
+global using YK.Core.Exceptions;

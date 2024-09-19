@@ -1,0 +1,11 @@
+﻿global using YK.Core.Contract;
+global using YK.Core.Events;
+global using YK.Core.Extensions;
+global using MySqlConnector;
+global using Npgsql;
+global using Serilog;
+global using Ardalis.Specification;
+global using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+global using YK.Core.DependencyInjection;
+global using YK.Core.Consts;
+global using YK.Core.Authorize;

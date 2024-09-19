@@ -1,0 +1,41 @@
+{
+  "HangfireSettings": {
+    //hangfire控制面板路由,例如:http://localhost:8000/jobs
+    "Route": "/jobs",
+    "Dashboard": {
+      "AppPath": "/",
+      "StatsPollingInterval": 2000,
+      "DashboardTitle": "Jobs"
+    },
+    "Server": {
+      "HeartbeatInterval": "00:00:30",
+      //队列
+      "Queues": [
+        "default"
+      ],
+      "SchedulePollingInterval": "00:00:15",
+      "ServerCheckInterval": "00:05:00",
+      "ServerName": null,
+      "ServerTimeout": "00:05:00",
+      "ShutdownTimeout": "00:00:15",
+      "WorkerCount": 5
+    },
+    "Storage": {
+      //hangfire数据库
+      "StorageProvider": "mysql",
+      "ConnectionString": "server=localhost;uid=root;pwd=123456;database=yorkove_hangfire;Allow User Variables=True",
+      "Options": {
+        "CommandBatchMaxTimeout": "00:05:00",
+        "QueuePollInterval": "00:00:01",
+        "UseRecommendedIsolationLevel": true,
+        "SlidingInvisibilityTimeout": "00:05:00",
+        "DisableGlobalLocks": true
+      }
+    },
+    "Credentials": {
+      //hangfire控制面板登录账户
+      "User": "Admin",
+      "Password": "asdf849201mnbv"
+    }
+  }
+}

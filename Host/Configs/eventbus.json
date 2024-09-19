@@ -1,0 +1,11 @@
+{
+  "EventBusOptions": {
+    "UseRabbitMQ": false,
+    "HostName": "localhost",
+    "VirtualHost": "/",
+    "UserName": "guest",
+    "Password": "guest",
+    "ExchangeName": "yk_event_bus",
+    "Port": 5672
+  }
+}
