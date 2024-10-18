@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 权限组
 /// </summary>
 [DataSeederOrder(10)]
-public class PermissionGroup: AuditableSoftDeleteEntity
+public class PermissionGroup: BaseSoftDeleteEntity
 {
     /// <summary>
     /// 名称

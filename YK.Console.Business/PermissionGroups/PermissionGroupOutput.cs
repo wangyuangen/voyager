@@ -2,7 +2,7 @@
 
 namespace YK.Console.Business.PermissionGroups;
 
-public class PermissionGroupOutput: AuditableOutput
+public class PermissionGroupOutput: BaseOutput
 {
     /// <summary>
     /// 名称

@@ -1,4 +1,6 @@
-﻿using YK.Core.Contract;
+﻿using Microsoft.AspNetCore.Http;
+using YK.Core.Contract;
+using YK.Module.Core.Contracts;
 using YK.Module.Core.Models;
 
 namespace YK.Module.Core.Abstractions;
@@ -14,7 +16,23 @@ public interface IConsoleService:IScopedService
     /// <param name="userStaffId">员工Id</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<UserStaffOutput> GetUserStaffAsync(Guid userStaffId, CancellationToken cancellationToken);
+    Task<UserStaffOutput?> GetUserStaffAsync(Guid userStaffId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 获取子级机构列表
+    /// </summary>
+    /// <param name="parentOrgId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<OrganizeInfoOutput>> GetChildOrgsAsync(Guid parentOrgId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 获取员工列表
+    /// </summary>
+    /// <param name="userStaffIds">员工id集合</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<UserStaffOutput>> GetUserStaffAsync(List<Guid> userStaffIds, CancellationToken cancellationToken);
 
     /// <summary>
     /// 获取岗位列表
@@ -23,4 +41,39 @@ public interface IConsoleService:IScopedService
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<List<PostInfoOutput>> GetPostsAsync(List<Guid> postIds, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 上传文件
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="bizInfo"></param>
+    /// <param name="reName"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<FileStorageInfoSimpleOutput> FileUploadAsync(IFormFile file, BizInfoOutput bizInfo, bool reName = false, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 获取文件列表
+    /// </summary>
+    /// <param name="bizInfo"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<FileStorageInfoSimpleOutput>> GetFilesByBizAsync(BizInfoOutput bizInfo, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 删除文件
+    /// </summary>
+    /// <param name="fileStorageId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Guid> DeleteFileAsync(Guid fileStorageId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 获取文件列表
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="bizIds"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<FileStorageInfoSimpleOutput>> GetFilesByBizAsync<T>(List<Guid> bizIds, CancellationToken cancellationToken);
 }

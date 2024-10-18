@@ -1,4 +1,5 @@
-﻿using YK.Core.Attributes;
+﻿using MassTransit;
+using YK.Core.Attributes;
 
 namespace YK.Core.Contract;
 
@@ -25,7 +26,7 @@ public abstract class AuditableEntity: BaseEntity, IAuditableEntity
     protected AuditableEntity()
     {
         CreatedOn = DateTime.Now;
-        Id = Guid.NewGuid();
+        Id = NewId.NextSequentialGuid();    //有序guid
     }
 }
 

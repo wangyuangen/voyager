@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 套餐
 /// </summary>
 [DataSeederOrder(10)]
-public class PackageInfo: AuditableSoftDeleteEntity
+public class PackageInfo: BaseSoftDeleteEntity
 {
     /// <summary>
     /// 名称

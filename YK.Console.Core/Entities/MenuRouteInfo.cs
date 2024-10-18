@@ -7,7 +7,7 @@ namespace YK.Console.Core.Entities;
 /// 菜单路由
 /// </summary>
 [DataSeederOrder(20)]
-public class MenuRouteInfo: AuditableSoftDeleteEntity
+public class MenuRouteInfo: BaseSoftDeleteEntity
 {
     /// <summary>
     /// 父级

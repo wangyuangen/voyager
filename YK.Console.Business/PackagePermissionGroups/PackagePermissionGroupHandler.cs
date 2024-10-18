@@ -9,7 +9,7 @@ internal class SavePackagePermissionGroupHandler(IRepository<PackagePermissionGr
         var exists = await _repo.NoDataPermissionQueryable().AsNoTracking()
            .Where(x => x.PackageId == request.PackageId)
            .Select(x => x.PermissionGroupId)
-           .ToListAsync();
+           .ToListAsync(cancellationToken);
 
         var inserts = request.PermissionGroupIds.Except(exists);
 

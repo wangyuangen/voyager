@@ -1,6 +1,6 @@
 ﻿namespace YK.Console.Business.ViewInfos;
 
-public class ViewInfoOutput : AuditableOutput
+public class ViewInfoOutput : BaseOutput
 {
     /// <summary>
     /// 视图路由命名,ts中声明

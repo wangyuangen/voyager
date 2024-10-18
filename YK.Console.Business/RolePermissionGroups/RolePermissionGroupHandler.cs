@@ -9,7 +9,7 @@ internal class SaveRolePermissionGroupHandler(IRepository<RolePermissionGroup> _
         var rolePermissions = await _repo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.RoleId == request.RoleId)
             .Select(x => x.PermissionGroupId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var insertPermissionGroups = request.PermissionGroupIds.Except(rolePermissions);
 

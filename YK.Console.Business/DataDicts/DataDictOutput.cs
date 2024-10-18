@@ -3,7 +3,7 @@
 /// <summary>
 /// 字典输出
 /// </summary>
-public class DataDictOutput:AuditableOutput
+public class DataDictOutput:BaseOutput
 {
     /// <summary>
     /// 字典父级编码

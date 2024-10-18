@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using YK.Console.Business.Abstractors;
 using YK.Core.Events;
+using YK.ORM.Specification;
 
 namespace YK.Console.Business.Roles;
 
@@ -13,12 +14,12 @@ internal class GetRoleAuthInfoHandler(IReadRepository<RoleMenuRoute> _menuRepo, 
         var menuRoutes = await _menuRepo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.RoleId == request.Id)
             .Select(x => x.MenuRouteId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var permissionGroups = await _permissionRepo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.RoleId == request.Id)
             .Select(x => x.PermissionGroupId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return new RoleAuthInfoOutput
         {
@@ -75,7 +76,8 @@ internal class RoleInfoSearchHandler(IReadRepository<RoleInfo> _repo) : IRequest
         Expression<Func<RoleInfo, bool>>? expression = request.Enabled.HasValue
            ? x => x.Enabled == request.Enabled
            : null;
-        return _repo.SimpleListAsync<RoleInfoOutput>(request, expression, cancellationToken);
+        var spec = new EntitiesBaseFilterSortSpec<RoleInfo, RoleInfoOutput>(request, expression, new string[] { nameof(RoleInfo.Sort) });
+        return _repo.ListAsync(spec, cancellationToken);
     }
 }
 

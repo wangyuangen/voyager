@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 视图
 /// </summary>
 [DataSeederOrder(10)]
-public class ViewInfo:AuditableSoftDeleteEntity
+public class ViewInfo:BaseSoftDeleteEntity
 {
     /// <summary>
     /// 视图路由命名,ts中声明

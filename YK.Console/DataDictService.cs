@@ -34,7 +34,7 @@ public class DataDictService(ISender _sender):IDynamicApi
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<int> DeleteAsync([Required]Guid id, CancellationToken cancellationToken)
+    public Task<Guid> DeleteAsync([Required]Guid id, CancellationToken cancellationToken)
         => _sender.Send(new DeleteDataDictRequest(id), cancellationToken);
 
     /// <summary>

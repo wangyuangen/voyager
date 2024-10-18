@@ -1,6 +1,6 @@
 ﻿namespace YK.Console.Business.ApiInfos;
 
-public class ApiInfoOutput : AuditableOutput
+public class ApiInfoOutput : BaseOutput
 {
     /// <summary>
     /// 接口名称

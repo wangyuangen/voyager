@@ -21,12 +21,12 @@ internal class GetUserStaffExtendHandler(IReadRepository<UserStaffOrg> _staffOrg
         result.OrgIds = await _staffOrgRepo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.UserStaffId == request.Id)
             .Select(x => x.OrgId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         result.RoleIds = await _staffRoleRepo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.UserStaffId == request.Id)
             .Select(x => x.RoleId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return result;
     }

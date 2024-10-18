@@ -9,7 +9,7 @@ internal class SaveRoleMenuRouteHandler(IRepository<RoleMenuRoute> _repo) : IReq
         var roleMenus = await _repo.NoDataPermissionQueryable().AsNoTracking()
              .Where(x => x.RoleId == request.RoleId)
              .Select(x => x.MenuRouteId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var insertMenus = request.MenuRouteIds.Except(roleMenus);
 

@@ -55,7 +55,7 @@ internal class RefreshTokenWithUserStaffHandler(IReadRepository<UserStaffInfo> _
             .Where(x => x.Id == request.UserStaffId)
             .Include(x => x.User)
             .Include(x => x.Org.Tenant)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (userStaff == null) 
             throw ResultOutput.Exception("员工不存在");
@@ -153,7 +153,8 @@ internal class CurrentUserStaffMenuRoutesHandler(ICurrentUser _currentUser,IRead
             .Include(x => x.Role.RoleMenuRoutes)
             .ThenInclude(x => x.MenuRoute.View)
             .SelectMany(x => x.Role.RoleMenuRoutes.Select(rm => rm.MenuRoute))
-            .ToListAsync();
+            .OrderBy(x=>x.Sort)
+            .ToListAsync(cancellationToken);
 
         var menus = result.Select(m =>
          {

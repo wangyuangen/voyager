@@ -9,7 +9,7 @@ internal class SaveTenantPackageHandler(IRepository<TenantPackage> _repo) : IReq
         var exists = await _repo.NoDataPermissionQueryable().AsNoTracking()
            .Where(x => x.TenantId == request.TenantId)
            .Select(x => x.PackageId)
-           .ToListAsync();
+           .ToListAsync(cancellationToken);
 
         var inserts = request.PackageIds.Except(exists);
 

@@ -19,12 +19,17 @@ public class MenuRouteSimpleOutput:BaseOutput
     /// 父级
     /// </summary>
     public Guid? ParentId { get; set; }
+
+    /// <summary>
+    /// 排序
+    /// </summary>
+    public int Sort { get; set; }
 }
 
 /// <summary>
 /// 菜单输出
 /// </summary>
-public class MenuRouteOutput: AuditableOutput
+public class MenuRouteOutput: BaseOutput
 {
     /// <summary>
     /// 父级

@@ -183,4 +183,12 @@ public static partial class Extensions
 
         return s.Replace(@"\", "/");
     }
+
+    /// <summary>
+    /// guide格式化
+    /// </summary>
+    /// <param name="guid"></param>
+    /// <returns></returns>
+    public static string ToUpperString(this Guid guid)
+        => guid.ToString("N").ToUpper();
 }

@@ -1,5 +1,4 @@
-﻿using Ardalis.Specification;
-using Ardalis.Specification.EntityFrameworkCore;
+﻿using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using YK.ORM.Abstractions;
@@ -114,7 +113,7 @@ public class ModuleRepositoryBase<T> : RepositoryBase<T>, IModuleRepositoryBase<
         var spec = new EntitiesExpressionSpec<T>(expression);
         var query = ApplySpecification(spec);
         _dbContext.Set<T>().RemoveRange(query);
-        return _dbContext.SaveChangesAsync();
+        return _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     #endregion

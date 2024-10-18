@@ -118,6 +118,6 @@ public class TenantJob(ConsoleDbContext _dbContext) : ITenantJob
 
         await _dbContext.Set<UserStaffRole>().AddAsync(userStaffRole, cancellationToken);
 
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

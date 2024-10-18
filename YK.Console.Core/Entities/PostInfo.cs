@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 岗位
 /// </summary>
 [DataSeederOrder(10)]
-public class PostInfo : AuditableTenantSoftDeleteEntity
+public class PostInfo : BaseTenantSoftDeleteEntity
 {
     /// <summary>
     /// 岗位名称

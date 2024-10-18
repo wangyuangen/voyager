@@ -39,11 +39,6 @@ public class DeleteOrganizeInfoRequest:IRequest<int>
 public class OrganizeInfoSearchRequest : BaseFilter, IRequest<List<OrganizeInfoOutput>>
 {
     /// <summary>
-    /// 机构类型
-    /// </summary>
-    public OrganizeTypeEnum? OrganizeType { get; set; }
-
-    /// <summary>
     /// 启用状态
     /// </summary>
     public EnabledStatusEnum? Enabled { get; set; }

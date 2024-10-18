@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YK.Console.Core.DbContext;
 
@@ -10,9 +11,11 @@ using YK.Console.Core.DbContext;
 namespace YK.Migrators.MySQL.Console
 {
     [DbContext(typeof(ConsoleDbContext))]
-    partial class ConsoleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240924082456_ApiInfoEntityChange")]
+    partial class ApiInfoEntityChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,6 +81,21 @@ namespace YK.Migrators.MySQL.Console
                         .HasMaxLength(32)
                         .HasColumnType("varchar(32)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
@@ -86,6 +104,15 @@ namespace YK.Migrators.MySQL.Console
 
                     b.Property<int>("Enabled")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -203,6 +230,21 @@ namespace YK.Migrators.MySQL.Console
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
@@ -231,9 +273,18 @@ namespace YK.Migrators.MySQL.Console
                     b.Property<bool>("IsKeepAlive")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Link")
                         .HasMaxLength(512)
                         .HasColumnType("varchar(512)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -365,6 +416,21 @@ namespace YK.Migrators.MySQL.Console
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
@@ -373,6 +439,15 @@ namespace YK.Migrators.MySQL.Console
 
                     b.Property<int>("Enabled")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -439,6 +514,21 @@ namespace YK.Migrators.MySQL.Console
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
@@ -447,6 +537,15 @@ namespace YK.Migrators.MySQL.Console
 
                     b.Property<int>("Enabled")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -498,11 +597,35 @@ namespace YK.Migrators.MySQL.Console
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -582,6 +705,21 @@ namespace YK.Migrators.MySQL.Console
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
@@ -590,6 +728,15 @@ namespace YK.Migrators.MySQL.Console
 
                     b.Property<int>("Enabled")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -965,6 +1112,21 @@ namespace YK.Migrators.MySQL.Console
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatedOrgBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedUserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CreatedUserStaffBy")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("char(36)");
 
@@ -976,6 +1138,15 @@ namespace YK.Migrators.MySQL.Console
 
                     b.Property<bool>("IsKeepAlive")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedUserName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()

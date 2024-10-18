@@ -5,7 +5,7 @@ namespace YK.Module.Core.Models;
 /// <summary>
 /// 岗位输出
 /// </summary>
-public class PostInfoOutput : AuditableOutput
+public class PostInfoOutput : BaseOutput
 {
     /// <summary>
     /// 岗位名称

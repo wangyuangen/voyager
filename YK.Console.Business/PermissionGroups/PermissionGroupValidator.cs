@@ -5,7 +5,7 @@ internal class CreatePermissionGroupValidator : AbstractValidator<CreatePermissi
     public CreatePermissionGroupValidator(IReadRepository<PermissionGroup> _repo)
     {
         RuleFor(x => x.Name)
-            .MustAsync(async (name, ct) => !await _repo.SimpleAnyAsync(x => x.Name == name, ct))
+            .MustAsync(async (inst, name, ct) => !await _repo.SimpleAnyAsync(x => x.Name == name && x.ParentId == inst.ParentId, ct))
             .WithMessage(_ => "权限组已存在");
     }
 }
@@ -15,7 +15,7 @@ internal class UpdatePermissionGroupValidator : AbstractValidator<UpdatePermissi
     public UpdatePermissionGroupValidator(IReadRepository<PermissionGroup> _repo)
     {
         RuleFor(x=>x.Name)
-             .MustAsync(async (inst, name,ct) => !await _repo.SimpleAnyAsync(x => x.Id!=inst.Id && x.Name == name ,ct))
+             .MustAsync(async (inst, name,ct) => !await _repo.SimpleAnyAsync(x => x.Id!=inst.Id && x.ParentId == inst.ParentId && x.Name == name ,ct))
             .WithMessage(_ => "权限组已存在");
     }
 }

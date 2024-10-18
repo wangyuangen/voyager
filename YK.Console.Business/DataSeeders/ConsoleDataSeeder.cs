@@ -26,7 +26,7 @@ public class ConsoleDataSeeder(ILogger<ConsoleDataSeeder> _logger, ISerializerSe
             set?.MakeGenericMethod(entitytype.Item1).Invoke(this, null);
         }
 
-        await InitDefaultDataDict();
+        await InitDefaultDataDict(cancellationToken);
 
         _logger.LogInformation("{seeder} succeed finished.", GetType().Name);
     }
@@ -80,7 +80,7 @@ public class ConsoleDataSeeder(ILogger<ConsoleDataSeeder> _logger, ISerializerSe
     /// 初始化默认字典
     /// </summary>
     /// <returns></returns>
-    private async Task InitDefaultDataDict()
+    private async Task InitDefaultDataDict(CancellationToken cancellationToken)
     {
         var enumType = typeof(DefaultDataDictEnum);
 
@@ -110,7 +110,8 @@ public class ConsoleDataSeeder(ILogger<ConsoleDataSeeder> _logger, ISerializerSe
 
             var existCodes = await _consoledb.Set<DataDictInfo>().AsNoTracking()
                 .Where(x => codes.Contains(x.Code))
-                .Select(x => x.Code).ToListAsync();
+                .Select(x => x.Code)
+                .ToListAsync(cancellationToken);
 
             codes = codes.Except(existCodes).ToList();
 
@@ -120,7 +121,7 @@ public class ConsoleDataSeeder(ILogger<ConsoleDataSeeder> _logger, ISerializerSe
 
                 _consoledb.Set<DataDictInfo>().AddRange(defaultDics);
 
-                await _consoledb.SaveChangesAsync();
+                await _consoledb.SaveChangesAsync(cancellationToken);
             }
         }
 

@@ -34,3 +34,17 @@ public class AuditableEntitiesPaginationFilterSpec<T, TResult> : EntitiesPaginat
           : base(filter, expression) =>
         Query.OrderByDescending(x => x.CreatedOn, !filter.HasOrderBy());
 }
+
+public class AuditableEntitiesSpec<T, TResult> : EntitiesExpressionSpec<T, TResult>
+    where T : AuditableEntity
+{
+    public AuditableEntitiesSpec(Expression<Func<T, bool>>? expression) : base(expression)
+        =>Query.OrderByDescending(x => x.CreatedOn);
+}
+
+public class AuditableEntitiesSpec<T> : EntitiesExpressionSpec<T>
+    where T : AuditableEntity
+{
+    public AuditableEntitiesSpec(Expression<Func<T, bool>>? expression) : base(expression)
+        => Query.OrderByDescending(x => x.CreatedOn);
+}

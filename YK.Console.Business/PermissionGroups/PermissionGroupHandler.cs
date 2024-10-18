@@ -2,6 +2,7 @@
 using YK.Console.Business.PackagePermissionGroups;
 using YK.Console.Business.PermissionGroupApis;
 using YK.Console.Business.TenantPackages;
+using YK.ORM.Specification;
 
 namespace YK.Console.Business.PermissionGroups;
 
@@ -54,7 +55,8 @@ internal class PermissionGroupSearchHandler(IReadRepository<PermissionGroup> _re
         Expression<Func<PermissionGroup, bool>>? expression = request.Enabled.HasValue
            ? x => x.Enabled == request.Enabled
            : null;
-        return _repo.SimpleListAsync<PermissionGroupOutput>(request, expression, cancellationToken);
+        var spec = new EntitiesBaseFilterSortSpec<PermissionGroup, PermissionGroupOutput>(request, expression, new string[] { nameof(PermissionGroup.Sort) });
+        return _repo.ListAsync(spec, cancellationToken);
     }
 }
 
@@ -65,7 +67,8 @@ internal class PermissionGroupWithApiSearchHandler(IReadRepository<PermissionGro
         Expression<Func<PermissionGroup, bool>>? expression = request.Enabled.HasValue
           ? x => x.Enabled == request.Enabled
           : null;
-        return _repo.SimpleListAsync<PermissionGroupWithApiOutput>(request, expression, cancellationToken);
+        var spec = new EntitiesBaseFilterSortSpec<PermissionGroup, PermissionGroupWithApiOutput>(request, expression, new string[] { nameof(PermissionGroup.Sort) });
+        return _repo.ListAsync(spec, cancellationToken);
     }
 }
 
@@ -88,7 +91,7 @@ internal class SearchAuthPermissionGroupHandler(ICurrentUser _currentUser, ISend
                 PackageIds = packageIds
             }, cancellationToken);
 
-            return packagePermissionGroups.Select(x => x.PermissionGroup).Distinct().ToList();
+            return packagePermissionGroups.Select(x => x.PermissionGroup).Distinct().OrderBy(x=>x.Sort).ToList();
         }
 
         return await _sender.Send(new PermissionGroupSearchRequest

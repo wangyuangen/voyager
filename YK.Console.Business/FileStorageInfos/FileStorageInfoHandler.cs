@@ -1,5 +1,30 @@
 ﻿namespace YK.Console.Business.FileStorageInfos;
 
+internal class BulkUploadFileStorageInfoHandler(IFileUploadService _fileUpload, IRepository<FileStorageInfo> _repo) : IRequestHandler<BulkUploadFileStorageInfoRequest, List<FileStorageInfoSimpleOutput>>
+{
+    public async Task<List<FileStorageInfoSimpleOutput>> Handle(BulkUploadFileStorageInfoRequest request, CancellationToken cancellationToken)
+    {
+        var uploadResults = new List<FileUploadInfo>();
+
+        FileUploadInfo uploadResult;
+        foreach (var file in request.Files)
+        {
+            uploadResult = await _fileUpload.UploadAsync(file, request.ReName, cancellationToken);
+            uploadResults.Add(uploadResult);
+        }
+
+        var entities = uploadResults.Adapt<List<FileStorageInfo>>();
+        entities.ForEach(entity =>
+        {
+            entity.BizId = request.BizId;
+            entity.BizName = request.BizName;
+        });
+        await _repo.AddRangeAsync(entities, cancellationToken);
+
+        return entities.Adapt<List<FileStorageInfoSimpleOutput>>();
+    }
+}
+
 internal class UploadFileStorageInfoHandler(IFileUploadService _fileUpload,IRepository<FileStorageInfo> _repo) : IRequestHandler<UploadFileStorageInfoRequest, FileStorageInfoSimpleOutput>
 {
     public async Task<FileStorageInfoSimpleOutput> Handle(UploadFileStorageInfoRequest request, CancellationToken cancellationToken)
@@ -20,18 +45,21 @@ internal class DeleteFileStorageInfoHandler(IFileUploadService _fileUpload,IRepo
 {
     public async Task<Guid> Handle(DeleteFileStorageInfoRequest request, CancellationToken cancellationToken)
     {
-        var entity = await _repo.GetByIdAsync(request.Id, cancellationToken)
-            ?? throw ResultOutput.Exception("文件不存在");
+        var entity = await _repo.SetGlobalFilterStatus(ignoreDataPermissionFilter:true)
+            .GetByIdAsync(request.Id, cancellationToken);
 
-        var fileUploadInfo = entity.Adapt<FileUploadInfo>();
+        if (entity != null)
+        {
+            var fileUploadInfo = entity.Adapt<FileUploadInfo>();
 
-        var hasDelete = await _fileUpload.DeleteAsync(fileUploadInfo);
+            var hasDelete = await _fileUpload.DeleteAsync(fileUploadInfo);
 
-        if (!hasDelete) throw ResultOutput.Exception($"文件 {entity.FileName} 删除失败");
+            if (!hasDelete) throw ResultOutput.Exception($"文件 {entity.FileName} 删除失败");
 
-        await _repo.DeleteAsync(entity, cancellationToken);
+            await _repo.DeleteAsync(entity, cancellationToken);
+        }
 
-        return entity.Id;
+        return request.Id;
     }
 }
 
@@ -70,3 +98,11 @@ internal class FileStorageInfoPageHandler(IReadRepository<FileStorageInfo> _repo
     public Task<PaginationResponse<FileStorageInfoOutput>> Handle(FileStorageInfoPageRequest request, CancellationToken cancellationToken)
         => _repo.SimplePageAsync<FileStorageInfoOutput>(request, cancellationToken: cancellationToken);
 }
+
+internal class FileStorageInfoSearchByBizListHandler(IReadRepository<FileStorageInfo> _repo) : IRequestHandler<FileStorageInfoSearchByBizListRequest, List<FileStorageInfoSimpleOutput>>
+{
+    public Task<List<FileStorageInfoSimpleOutput>> Handle(FileStorageInfoSearchByBizListRequest request, CancellationToken cancellationToken)
+        => _repo.SetGlobalFilterStatus(ignoreDataPermissionFilter: true)
+            .SimpleListAsync<FileStorageInfoSimpleOutput>(x => x.BizId.HasValue && request.BizIds.Contains(x.BizId.Value) && x.BizName == request.BizName, cancellationToken);
+}
+

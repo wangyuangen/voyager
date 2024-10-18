@@ -12,7 +12,7 @@ internal class SaveUserStaffRoleHandler(IRepository<UserStaffRole> _repo,ICacheM
         var exists = await _repo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.UserStaffId == request.UserStaffId)
             .Select(x => x.RoleId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var inserts = request.RoleIds.Except(exists);
 

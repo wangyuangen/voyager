@@ -9,7 +9,7 @@ internal class SavePackageMenuRouteHandler(IRepository<PackageMenuRoute> _repo) 
         var exists = await _repo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.PackageId == request.PackageId)
             .Select(x => x.MenuRouteId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var inserts = request.MenuRouteIds.Except(exists);
 

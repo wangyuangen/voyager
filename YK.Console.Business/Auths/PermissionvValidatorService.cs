@@ -19,7 +19,7 @@ public class PermissionvValidatorService(ISender _sender,IHttpContextAccessor _h
             return new UserStaffPermissionScope(permissionScope);
 
         var staffPermissionScope = await _sender.Send(new GetUserStaffOrgsByPermissionScopeRequest(permissionScope))
-                ?? new UserStaffPermissionScope();
+                ?? new UserStaffPermissionScope(DataPermissionScope.CurrentUserStaff);
 
         //#if DEBUG
         //        //DEBUG模式平台管理员默认具有全部权限

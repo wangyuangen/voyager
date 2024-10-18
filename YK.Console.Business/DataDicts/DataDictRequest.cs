@@ -21,7 +21,7 @@ public class UpdateDataDictRequest:DataDictInput, IRequest<Guid>
 /// <summary>
 /// 删除字典
 /// </summary>
-public class DeleteDataDictRequest:IRequest<int>
+public class DeleteDataDictRequest:IRequest<Guid>
 {
     /// <summary>
     /// 主键

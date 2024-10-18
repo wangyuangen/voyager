@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using YK.ORM.Specification;
 
 namespace YK.Console.Business.ViewInfos;
 
@@ -38,6 +39,7 @@ internal class ViewInfoSearchHandler(IReadRepository<ViewInfo> _repo) : IRequest
         Expression<Func<ViewInfo, bool>>? expression = request.Enabled.HasValue
            ? x => x.Enabled == request.Enabled
            : null;
-        return _repo.SimpleListAsync<ViewInfoOutput>(request, expression, cancellationToken);
+        var spec = new EntitiesBaseFilterSortSpec<ViewInfo, ViewInfoOutput>(request, expression, new string[] { nameof(ViewInfo.Sort) });
+        return _repo.ListAsync(spec, cancellationToken);
     }
 }

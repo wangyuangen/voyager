@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 角色信息
 /// </summary>
 [DataSeederOrder(10)]
-public class RoleInfo : AuditableTenantSoftDeleteEntity
+public class RoleInfo : BaseTenantSoftDeleteEntity
 {
     /// <summary>
     /// 角色名称

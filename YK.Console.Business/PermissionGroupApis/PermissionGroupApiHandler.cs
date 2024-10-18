@@ -12,7 +12,7 @@ internal class SavePermissionGroupApiHandler(IRepository<PermissionGroupApi> _re
         var permissionApis = await _repo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x => x.PermissionGroupId == request.PermissionGroupId)
             .Select(x => x.ApiId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var inserts = request.ApiIds.Except(permissionApis);
 
@@ -55,7 +55,7 @@ internal class CurrentUserApiPermissionDataScopeHandler(IReadRepository<UserStaf
                 .Include(x => x.Role.RolePermissionGroups.Where(x => x.PermissionGroup.Enabled == EnabledStatusEnum.Enabled))
                 .ThenInclude(x => x.PermissionGroup.PermissionGroupApis.Where(x => x.Api.Enabled == EnabledStatusEnum.Enabled))
                 .ThenInclude(x=>x.Api)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             var result = userStaffRoles.SelectMany(x =>
                 x.Role.RolePermissionGroups.SelectMany(rp =>

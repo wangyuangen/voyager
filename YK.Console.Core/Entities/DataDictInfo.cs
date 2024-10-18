@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 数据字典
 /// </summary>
 [DataSeederOrder(10)]
-public class DataDictInfo:AuditableSoftDeleteEntity
+public class DataDictInfo:BaseSoftDeleteEntity
 {
     /// <summary>
     /// 字典父级编码

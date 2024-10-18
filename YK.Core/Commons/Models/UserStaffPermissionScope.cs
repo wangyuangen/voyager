@@ -10,21 +10,17 @@ public class UserStaffPermissionScope
     /// <summary>
     ///  当前部门+下级部门 | 当前部门+附属部门 | 当前部门+下级部门+附属部门
     /// </summary>
-    public IEnumerable<Guid> OrgScope { get; private set; }
+    public IEnumerable<Guid> OrgScope { get; set; }
 
     /// <summary>
     /// 权限范围
     /// </summary>
-    public DataPermissionScope PermissionScope { get; private set; }
+    public DataPermissionScope PermissionScope { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public UserStaffPermissionScope()
-    {
-        OrgScope = new List<Guid>();
-        PermissionScope = DataPermissionScope.CurrentUserStaff;
-    }
+    public UserStaffPermissionScope(){ }
 
     /// <summary>
     /// 
@@ -33,6 +29,7 @@ public class UserStaffPermissionScope
     public UserStaffPermissionScope(DataPermissionScope permissionScope)
     {
         PermissionScope = permissionScope;
+        OrgScope = new List<Guid>();
     }
 
     /// <summary>

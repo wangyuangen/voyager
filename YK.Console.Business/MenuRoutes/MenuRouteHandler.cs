@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using YK.Console.Business.PackageMenuRoutes;
 using YK.Console.Business.TenantPackages;
+using YK.ORM.Specification;
 
 namespace YK.Console.Business.MenuRoutes;
 
@@ -43,7 +44,9 @@ internal class MenuRouteSearchHandler(IReadRepository<MenuRouteInfo> _repo) : IR
         Expression<Func<MenuRouteInfo, bool>>? expression = request.Enabled.HasValue
            ? x => x.Enabled == request.Enabled
            : null;
-        return _repo.SimpleListAsync<MenuRouteOutput>(request, expression, cancellationToken);
+        var spec = new EntitiesBaseFilterSortSpec<MenuRouteInfo, MenuRouteOutput>(request, expression, new string[] { nameof(MenuRouteInfo.Sort) });
+
+        return _repo.ListAsync(spec, cancellationToken);
     }
 }
 
@@ -67,9 +70,9 @@ internal class SearchAuthMenuRoutesHandler(ICurrentUser _currentUser, ISender _s
                 PackageIds = packageIds,
             }, cancellationToken);
 
-            return packageMenuRoutes.Select(x => x.MenuRoute).Distinct().ToList();
+            return packageMenuRoutes.Select(x => x.MenuRoute).Distinct().OrderBy(x=>x.Sort).ToList();
         }
-
-        return await _repo.SimpleListAsync<MenuRouteSimpleOutput>(x => x.Enabled == EnabledStatusEnum.Enabled, cancellationToken);
+        var spec = new EntitiesSortExpressionSpec<MenuRouteInfo, MenuRouteSimpleOutput>(x => x.Enabled == EnabledStatusEnum.Enabled, new string[] { nameof(MenuRouteInfo.Sort) });
+        return await _repo.ListAsync(spec, cancellationToken);
     }
 }

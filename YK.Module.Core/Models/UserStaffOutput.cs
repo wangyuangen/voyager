@@ -5,7 +5,7 @@ using YK.Module.Core.Enums;
 namespace YK.Module.Core.Models;
 
 /// <summary>
-/// 员工
+/// 员工输出
 /// </summary>
 public class UserStaffOutput : AuditableOutput
 {

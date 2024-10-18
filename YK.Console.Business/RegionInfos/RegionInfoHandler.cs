@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using ToolGood.Words.Pinyin;
+using YK.ORM.Specification;
 
 namespace YK.Console.Business.RegionInfos;
 
@@ -21,6 +22,9 @@ internal class UpdateRegionInfoHandler(IRepository<RegionInfo> _repo) : IRequest
     {
         var entity = await _repo.GetByIdAsync(request.Id, cancellationToken)
             ?? throw ResultOutput.Exception("行政区域不存在");
+
+        if (entity.Code != request.Code && await _repo.SimpleAnyAsync(x => x.ParentCode == entity.Code))
+            throw ResultOutput.Exception("不允许修改存在下级关联区域的区域编码");
 
         entity.Update(request.ParentCode, request.Name, request.Level, request.Code, null, null, request.Url, null, request.Sort, request.Hot, request.Enabled);
 
@@ -65,7 +69,8 @@ internal class RegionInfoSearchHandler(IReadRepository<RegionInfo> _repo): IRequ
             expression = expression.AndAlso(x => x.Hot == request.Hot.Value);
         if (request.Enabled.HasValue)
             expression = expression.AndAlso(x => x.Enabled == request.Enabled.Value);
-        return _repo.SetGlobalFilterStatus(ignoreDataPermissionFilter:true).SimpleListAsync<RegionInfoSimpleOuput>(expression, cancellationToken);
+        var spec = new EntitiesSortExpressionSpec<RegionInfo, RegionInfoSimpleOuput>(expression, new string[] { nameof(RegionInfo.Sort) });
+        return _repo.SetGlobalFilterStatus(ignoreDataPermissionFilter:true).ListAsync(spec, cancellationToken);
     }
 }
 

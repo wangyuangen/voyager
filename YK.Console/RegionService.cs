@@ -104,7 +104,7 @@ public class RegionService(ISender _sender,IBackgroundJob _job,IReadRepository<R
              {
                  code = x.Code,
                  parentCode = x.ParentCode
-             }).ToListAsync();
+             }).ToListAsync(cancellationToken);
 
 
         string? parentCode = regions.FirstOrDefault(x=>x.code == code)?.parentCode;

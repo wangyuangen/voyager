@@ -27,7 +27,7 @@ internal class ClearRoleAuthByRoleAuthChangeHandler(
         var userStaffIds = await _staffRoleRepo.NoDataPermissionQueryable().AsNoTracking()
             .Where(x=>x.RoleId == notification.Event.RoleId)
             .Select(x => x.UserStaffId)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         string cacheKey;
         foreach (var staffId in userStaffIds)

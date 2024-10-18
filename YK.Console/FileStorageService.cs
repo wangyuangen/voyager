@@ -2,6 +2,7 @@
 using YK.Console.Business.FileStorageInfos;
 using YK.Console.Core.Consts;
 using YK.Core.Attributes;
+using YK.Module.Core.Models;
 
 namespace YK.Console;
 
@@ -11,6 +12,15 @@ namespace YK.Console;
 [DynamicApi(Area = ConsoleAppConsts.ApiGroup),Order(115)]
 public class FileStorageService(ISender _sender):IDynamicApi
 {
+    /// <summary>
+    /// 批量上传文件
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<List<FileStorageInfoSimpleOutput>> BulkUploadAsync([FromForm] BulkUploadFileStorageInfoRequest request, CancellationToken cancellationToken)
+        => _sender.Send(request,cancellationToken);
+
     /// <summary>
     /// 上传文件
     /// </summary>

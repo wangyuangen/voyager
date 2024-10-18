@@ -1,4 +1,6 @@
-﻿namespace YK.Console.Business.FileStorageInfos;
+﻿using YK.Module.Core.Contracts;
+
+namespace YK.Module.Core.Models;
 
 /// <summary>
 /// 文件存储信息简单输出
@@ -19,4 +21,14 @@ public class FileStorageInfoSimpleOutput:BaseOutput
     /// 链接地址
     /// </summary>
     public string LinkUrl { get; set; }
+
+    /// <summary>
+    /// 所属业务对象主键Id
+    /// </summary>
+    public Guid? BizId { get; set; }
+
+    /// <summary>
+    /// 所属业务对象名称
+    /// </summary>
+    public string? BizName { get; set; }
 }

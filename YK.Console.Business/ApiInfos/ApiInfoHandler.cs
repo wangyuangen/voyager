@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using YK.Console.Business.Abstractors;
+using YK.ORM.Specification;
 
 namespace YK.Console.Business.ApiInfos;
 
@@ -29,6 +30,9 @@ internal class ApiInfoSearchHandler(IReadRepository<ApiInfo> _repo) : IRequestHa
         Expression<Func<ApiInfo, bool>>? expression = request.Enabled.HasValue
             ? x => x.Enabled == request.Enabled
             : null;
-        return  _repo.SimpleListAsync<ApiInfoOutput>(request, expression, cancellationToken);
+
+        var spec = new EntitiesBaseFilterSortSpec<ApiInfo, ApiInfoOutput>(request, expression, new string[] { nameof(ApiInfo.Sort) });
+
+        return _repo.ListAsync(spec, cancellationToken);
     }
 }

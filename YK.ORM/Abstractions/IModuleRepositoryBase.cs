@@ -40,7 +40,7 @@ public interface IModuleRepositoryBase<T>
     Task<PaginationResponse<TResult>> SimplePageAsync<TResult>(PaginationFilter filter, Expression<Func<T, bool>>? expression = null, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 物理删除
+    /// 批量物理删除
     /// </summary>
     /// <param name="expression"></param>
     /// <param name="cancellationToken"></param>
@@ -48,7 +48,7 @@ public interface IModuleRepositoryBase<T>
     Task<int> DeleteAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 逻辑删除(只针对实现自ISoftDelete的实体有效,非ISoftDelete会物理删除)
+    /// 批量逻辑删除(只针对实现自ISoftDelete的实体有效,非ISoftDelete会物理删除)
     /// </summary>
     /// <param name="expression"></param>
     /// <param name="cancellationToken"></param>

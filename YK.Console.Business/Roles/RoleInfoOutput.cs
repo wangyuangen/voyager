@@ -1,6 +1,6 @@
 ﻿namespace YK.Console.Business.Roles;
 
-public class RoleInfoOutput: AuditableOutput
+public class RoleInfoOutput: BaseOutput
 {
     /// <summary>
     /// 角色名称

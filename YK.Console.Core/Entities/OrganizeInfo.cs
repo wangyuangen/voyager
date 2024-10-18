@@ -1,5 +1,4 @@
-﻿using YK.Console.Core.Enums;
-using YK.ORM.Attributes;
+﻿using YK.ORM.Attributes;
 
 namespace YK.Console.Core.Entities;
 

@@ -6,7 +6,7 @@ namespace YK.Console.Core.Entities;
 /// 接口信息
 /// </summary>
 [DataSeederOrder(10)]
-public class ApiInfo: AuditableSoftDeleteEntity
+public class ApiInfo: BaseSoftDeleteEntity
 {
     /// <summary>
     /// 接口名称

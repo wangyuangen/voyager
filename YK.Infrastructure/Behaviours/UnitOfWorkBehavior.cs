@@ -18,11 +18,11 @@ public abstract class UnitOfWorkBehavior<TRequest, TResponse>(IUnitOfWork _unitO
 
             response = await next();
 
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
         }
         catch (Exception)
         {
-            await _unitOfWork.RollbackAsync();
+            await _unitOfWork.RollbackAsync(cancellationToken);
             throw;
         }
         finally

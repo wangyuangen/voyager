@@ -13,7 +13,7 @@ internal class SaveUserStaffOrgHandler(IRepository<UserStaffOrg> _repo,ICacheMan
         var exists = await _repo.NoDataPermissionQueryable().AsNoTracking()
              .Where(x => x.UserStaffId == request.UserStaffId)
              .Select(x => x.OrgId)
-             .ToListAsync();
+             .ToListAsync(cancellationToken);
 
         var inserts = request.OrgIds.Except(exists);
 
@@ -70,9 +70,9 @@ internal class GetUserStaffOrgsByPermissionScopeHandler(ICurrentUser _currentUse
             var affiliateOrgs = await _repo.NoDataPermissionQueryable()
                 .Where(x => x.UserStaffId == currentUserStaffId)
                 .Select(x => x.OrgId)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
-            var affiliateWithChild = affiliateOrgs;
+            var affiliateWithChild = affiliateOrgs.Adapt<List<Guid>>();
 
             if (_currentUser.OrgId.HasValue)
             {
