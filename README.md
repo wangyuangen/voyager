@@ -42,6 +42,10 @@ dotnet ef migrations add Hello --project ../YG.Migrators.MySQL/ -c ConsoleDbCont
 
 ### 预览
 
+![image](https://github.com/user-attachments/assets/fe2b6f7e-1c26-4d5c-919f-a1e92dc9dddb)
+
+> 接口文档
+
 ![输入图片说明](Host/UploadFiles/2024/09/09/image_login.png)
 
 > 选择登录身份 [当只有一个就职身份信息时，后续调整为默认不需要选择身份]
