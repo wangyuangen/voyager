@@ -4,6 +4,8 @@
 
 基于.Net8+JWT+EF8+MediatR+Serilog+Hangfire+Redis等技术栈构建的整洁架构多模块动态Api解决方案,支持灵活的数据权限组配置，按业务分库分模块，支持进程类领域事件，实时消息推送，事务，CAP事件总线，分布式缓存等。
 
+[前往前端项目](https://github.com/wangyuangen/voyagerui)
+
 ### 当前功能
 1. 接口管理：自动同步Swagger的接口数据
 2. 权限组配置：将多个接口打包为一个权限组，并对当前权限组分配数据权限范围
